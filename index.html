@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Business Impact Calculator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <p class="eyebrow">Хакатон · оценка потерь</p>
+      <h1>Business Impact Calculator</h1>
+      <p class="lead">
+        Рассчитайте, сколько компания теряет из-за неэффективного рабочего времени:
+        в неделю и за год, в тенге.
+      </p>
+    </header>
+
+    <main class="layout">
+      <section class="card form-card" aria-labelledby="form-title">
+        <h2 id="form-title">Исходные данные</h2>
+        <p class="hint">Все поля обязательны. Значения должны быть положительными числами.</p>
+
+        <form id="calc-form" novalidate>
+          <div class="field">
+            <label for="employees">Количество сотрудников</label>
+            <input
+              id="employees"
+              name="employees"
+              type="number"
+              inputmode="decimal"
+              min="0"
+              step="any"
+              placeholder="Например, 25"
+              autocomplete="off"
+            >
+          </div>
+
+          <div class="field">
+            <label for="hours">Средние часы потерянного времени на одного сотрудника в неделю</label>
+            <input
+              id="hours"
+              name="hours"
+              type="number"
+              inputmode="decimal"
+              min="0"
+              step="any"
+              placeholder="Например, 4.5"
+              autocomplete="off"
+            >
+          </div>
+
+          <div class="field">
+            <label for="hourlyRate">Стоимость одного рабочего часа, ₸</label>
+            <input
+              id="hourlyRate"
+              name="hourlyRate"
+              type="number"
+              inputmode="decimal"
+              min="0"
+              step="any"
+              placeholder="Например, 2500"
+              autocomplete="off"
+            >
+          </div>
+
+          <p id="form-error" class="error" role="alert" hidden></p>
+
+          <div class="actions">
+            <button type="submit" class="btn-primary">Рассчитать потери</button>
+            <button type="button" id="reset-btn" class="btn-secondary">Сбросить</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="card results-card" aria-labelledby="results-title">
+        <h2 id="results-title">Результаты</h2>
+        <p id="results-empty" class="empty">Введите данные и нажмите «Рассчитать потери».</p>
+
+        <div id="results" class="results" hidden>
+          <div class="metric-grid">
+            <article class="metric">
+              <p class="metric-label">Недельные потери</p>
+              <p id="weekly-loss" class="metric-value">—</p>
+            </article>
+            <article class="metric metric-accent">
+              <p class="metric-label">Годовые потери</p>
+              <p id="yearly-loss" class="metric-value">—</p>
+            </article>
+          </div>
+
+          <div class="chart-block">
+            <p class="chart-title">Сравнение потерь</p>
+            <p class="chart-caption">Годовые потери рассчитаны как недельные × 52.</p>
+            <div class="bars" aria-hidden="true">
+              <div class="bar-row">
+                <span class="bar-label">Неделя</span>
+                <div class="bar-track">
+                  <div id="weekly-bar" class="bar weekly"></div>
+                </div>
+                <span id="weekly-bar-value" class="bar-value">—</span>
+              </div>
+              <div class="bar-row">
+                <span class="bar-label">Год</span>
+                <div class="bar-track">
+                  <div id="yearly-bar" class="bar yearly"></div>
+                </div>
+                <span id="yearly-bar-value" class="bar-value">—</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
